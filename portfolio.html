@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oloyede Samuel Timilehin — Portfolio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['DM Serif Display', 'serif'],
+            mono:  ['DM Mono', 'monospace'],
+            sans:  ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            navy:     '#0b1120',
+            navymid:  '#111827',
+            navylt:   '#1e2a3a',
+            slate:    '#334155',
+            muted:    '#64748b',
+            subtle:   '#94a3b8',
+            line:     '#1e2d40',
+            teal:     '#007a8c',
+            teallt:   '#61e2f0',
+            tealdark: '#00303f',
+            cream:    '#f1f5f9',
+            creamdim: '#cbd5e1',
+            accent:   '#3b82f6',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%':   { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            blink: {
+              '0%,100%': { opacity: '1' },
+              '50%':     { opacity: '0.3' },
+            },
+          },
+          animation: {
+            'fu1': 'fadeUp 0.6s ease both',
+            'fu2': 'fadeUp 0.6s 0.1s ease both',
+            'fu3': 'fadeUp 0.6s 0.2s ease both',
+            'fu4': 'fadeUp 0.6s 0.3s ease both',
+            'blink': 'blink 2s infinite',
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(#1e2d40 1px, transparent 1px),
+        linear-gradient(90deg, #1e2d40 1px, transparent 1px);
+      background-size: 60px 60px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, #007a8c, transparent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .s-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: #cbd5e1;
+      background: #1e2a3a;
+      border: 1px solid #1e2d40;
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      cursor: default;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .s-tag:hover { border-color: #007a8c; color: #61e2f0; background: rgba(0,122,140,0.07); }
+
+    .t-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: #61e2f0;
+      background: rgba(0,122,140,0.15);
+      border: 1px solid rgba(0,122,140,0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .p-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #64748b;
+      border: 1px solid #1e2d40;
+      padding: 0.25rem 0.55rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .p-link:hover { color: #61e2f0; border-color: #007a8c; }
+
+    .c-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      border: 1px solid #1e2d40;
+      padding: 0.6rem 1.25rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .c-btn:hover { color: #61e2f0; border-color: rgba(0,122,140,0.5); }
+
+    /* Form styles */
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      background: #111827;
+      border: 1px solid #1e2d40;
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      color: #f1f5f9;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: #007a8c; }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: #64748b; }
+    .contact-form textarea { resize: vertical; min-height: 130px; }
+  </style>
+</head>
+
+<body class="bg-navy text-cream font-sans font-light leading-relaxed overflow-x-hidden">
+
+  <!-- ── NAV ── -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-5 bg-navy/85 backdrop-blur-md border-b border-line">
+    <a href="#" class="font-serif text-teallt text-xl tracking-wide">OST.</a>
+    <ul class="flex gap-10 list-none m-0 p-0">
+      <li><a href="#about"    class="nav-link font-mono text-xs tracking-widest uppercase text-subtle hover:text-teallt transition-colors duration-200">About</a></li>
+      <li><a href="#skills"   class="nav-link font-mono text-xs tracking-widest uppercase text-subtle hover:text-teallt transition-colors duration-200">Skills</a></li>
+      <li><a href="#projects" class="nav-link font-mono text-xs tracking-widest uppercase text-subtle hover:text-teallt transition-colors duration-200">Projects</a></li>
+      <li><a href="#contact"  class="nav-link font-mono text-xs tracking-widest uppercase text-subtle hover:text-teallt transition-colors duration-200">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="relative min-h-screen grid grid-cols-2 gap-16 items-center px-16 pt-32 pb-16">
+    <div class="grid-bg absolute inset-0 opacity-35 pointer-events-none"></div>
+
+    <!-- Left -->
+    <div class="relative z-10">
+      <div class="animate-fu1 inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-teallt border border-teal/30 px-3 py-1.5 rounded-sm mb-7">
+        <span class="w-1.5 h-1.5 rounded-full bg-teallt animate-blink"></span>
+        Open to opportunities
+      </div>
+
+      <h1 class="animate-fu2 font-serif leading-tight text-cream mb-3" style="font-size:clamp(2.2rem,4vw,3.8rem)">
+        Hello, I'm<br/>
+        <em class="text-teallt" style="font-size:clamp(2.5rem,4.5vw,4.2rem)">Oloyede Samuel<br/>Timilehin</em>
+      </h1>
+
+      <p class="animate-fu3 text-subtle text-sm font-mono mb-8 max-w-lg leading-relaxed">
+        Computer Engineer &nbsp;·&nbsp; Web Developer &nbsp;·&nbsp; Sports Pundit &amp; Writer &nbsp;·&nbsp; Social Media &amp; Brand Manager
+      </p>
+
+      <div class="animate-fu4 flex gap-4 flex-wrap">
+        <a href="#about"
+           class="inline-flex items-center gap-2 bg-teal text-white font-mono text-xs font-medium tracking-widest uppercase px-7 py-3.5 rounded-sm hover:bg-teallt hover:text-tealdark transition-colors hover:-translate-y-0.5 transform duration-150">
+          Learn More →
+        </a>
+        <a href="#contact"
+           class="inline-flex items-center gap-2 border border-slate text-creamdim font-mono text-xs tracking-widest uppercase px-7 py-3.5 rounded-sm hover:border-teal hover:text-teallt transition-colors duration-200">
+          Hire Me
+        </a>
+      </div>
+
+      <div class="animate-fu4 mt-10">
+        <a href="#projects" class="font-mono text-xs tracking-widest uppercase text-muted hover:text-teallt transition-colors duration-200 flex items-center gap-2">
+          <span>↓</span> See My Work
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Photo + Code card -->
+    <div class="relative z-10 animate-fu3 flex flex-col gap-5">
+
+      <!-- Profile photo -->
+      <div class="flex justify-center">
+        <div class="relative">
+          <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-teal/50 shadow-2xl" style="box-shadow:0 0 40px rgba(0,122,140,0.25)">
+            <img src="IMG_5233.jpeg" alt="Oloyede Samuel Timilehin"
+                 class="w-full h-full object-cover object-top"/>
+          </div>
+          <span class="absolute bottom-3 right-3 w-4 h-4 rounded-full bg-green-400 border-2 border-navy animate-blink"></span>
+        </div>
+      </div>
+
+      <div class="bg-navymid border border-line rounded-md overflow-hidden shadow-2xl">
+        <div class="flex items-center gap-2 px-4 py-3 bg-navylt border-b border-line">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
+          <span class="font-mono text-xs text-muted ml-2">samuel.ts</span>
+        </div>
+        <pre class="font-mono text-sm leading-8 p-6 overflow-x-auto"><span class="text-sky-300">const</span> <span class="text-creamdim">developer</span> <span class="text-subtle">=</span> {
+  <span class="text-teallt">name</span><span class="text-subtle">:</span>    <span class="text-green-300">"Oloyede Samuel Timilehin"</span>,
+  <span class="text-teallt">degree</span><span class="text-subtle">:</span>  <span class="text-green-300">"B.Eng Computer Engineering"</span>,
+  <span class="text-teallt">grade</span><span class="text-subtle">:</span>   <span class="text-green-300">"2nd Class Upper (Hons)"</span>,
+  <span class="text-teallt">school</span><span class="text-subtle">:</span>  <span class="text-green-300">"Redeemer's University"</span>,
+  <span class="text-teallt">stack</span><span class="text-subtle">:</span>   [<span class="text-green-300">"Python"</span>, <span class="text-green-300">"HTML"</span>, <span class="text-green-300">"CSS"</span>,
+           <span class="text-green-300">"JavaScript"</span>, <span class="text-green-300">"Tailwind"</span>],
+  <span class="text-teallt">also</span><span class="text-subtle">:</span>    [<span class="text-green-300">"IoT"</span>, <span class="text-green-300">"Sports Writing"</span>,
+           <span class="text-green-300">"Brand Management"</span>],
+  <span class="text-teallt">available</span><span class="text-subtle">:</span> <span class="text-sky-300">true</span>,
+};
+
+<span class="text-muted italic">// Let's build something great.</span></pre>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 mt-3 border border-line rounded-md overflow-hidden divide-x divide-line">
+        <div class="bg-navymid py-5 text-center">
+          <span class="font-serif text-3xl text-teallt block">3+</span>
+          <span class="font-mono text-xs tracking-widest uppercase text-muted">Yrs Exp.</span>
+        </div>
+        <div class="bg-navymid py-5 text-center">
+          <span class="font-serif text-3xl text-teallt block">2</span>
+          <span class="font-mono text-xs tracking-widest uppercase text-muted">Projects</span>
+        </div>
+        <div class="bg-navymid py-5 text-center">
+          <span class="font-serif text-3xl text-teallt block">2nd</span>
+          <span class="font-mono text-xs tracking-widest uppercase text-muted">Class Upper</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about" class="px-16 py-24 bg-navymid border-y border-line">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 gap-20 items-start">
+
+      <!-- Left -->
+      <div>
+        <div class="flex items-center gap-3 font-mono text-xs tracking-widest uppercase text-teallt mb-4">
+          01 — About <span class="w-12 h-px bg-teal opacity-40"></span>
+        </div>
+
+        <!-- Photo in About -->
+        <div class="mb-8 flex justify-start">
+          <div class="relative">
+            <div class="w-40 h-40 rounded-2xl overflow-hidden border-2 border-teal/40 shadow-xl" style="box-shadow:0 0 30px rgba(0,122,140,0.2)">
+              <img src="IMG_5233.jpeg" alt="Oloyede Samuel Timilehin"
+                   class="w-full h-full object-cover object-top"/>
+            </div>
+            <div class="absolute -bottom-2 -right-2 bg-teal text-white font-mono text-xs px-2 py-1 rounded-sm tracking-wide">
+              OST
+            </div>
+          </div>
+        </div>
+        <h2 class="font-serif text-cream mb-8 leading-tight" style="font-size:clamp(2rem,3.5vw,3rem)">
+          Engineered for<br/><em class="text-teallt">impact.</em>
+        </h2>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-3 font-mono text-sm text-subtle"><span class="text-teallt text-xs">▸</span> Computer Engineering Graduate</li>
+          <li class="flex items-center gap-3 font-mono text-sm text-subtle"><span class="text-teallt text-xs">▸</span> Redeemer's University — 2nd Class Upper</li>
+          <li class="flex items-center gap-3 font-mono text-sm text-subtle"><span class="text-teallt text-xs">▸</span> Python Certification (Distinction) — Aptech</li>
+          <li class="flex items-center gap-3 font-mono text-sm text-subtle"><span class="text-teallt text-xs">▸</span> IoT, Web Dev &amp; Sports Media</li>
+          <li class="flex items-center gap-3 font-mono text-sm text-subtle"><span class="text-teallt text-xs">▸</span> Open to opportunities</li>
+        </ul>
+      </div>
+
+      <!-- Right -->
+      <div class="reveal space-y-5 text-creamdim text-base">
+        <p>A Computer Engineering graduate (<strong class="text-teallt font-medium">Second Class Honours Upper Division</strong>) from Redeemer's University with a Python Programming certification (distinction) from Aptech. Over one year of experience in Python programming and web development, with expertise in creating responsive, cross-browser-compatible web designs and solving complex logical problems.</p>
+        <p>Successfully designed and implemented an <strong class="text-teallt font-medium">IoT-based Smart Energy Monitoring System</strong> for tertiary institutions, integrating hardware sensors, ESP32 microcontrollers, cloud-based data analytics and user interfaces for real-time monitoring. Combines strong technical knowledge with creative media skills to build scalable digital solutions and compelling content that resonates with audiences.</p>
+        <p>Dynamic and articulate <strong class="text-teallt font-medium">sports pundit and writer</strong> with a proven ability to deliver insightful commentary and engaging analysis. Experienced social media and brand manager skilled at developing and executing strategies that grow audiences and strengthen brand visibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section id="skills" class="px-16 py-24">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex items-center gap-3 font-mono text-xs tracking-widest uppercase text-teallt mb-3">
+        02 — Skills <span class="w-12 h-px bg-teal opacity-40"></span>
+      </div>
+      <h2 class="font-serif text-cream mb-12 leading-tight" style="font-size:clamp(2rem,3.5vw,3rem)">
+        Technical <em class="text-teallt">Arsenal</em>
+      </h2>
+
+      <div class="grid grid-cols-3 gap-6">
+
+        <div class="reveal bg-navymid border border-line rounded-md p-7 hover:border-teal/40 transition-colors duration-200">
+          <div class="font-mono text-xs tracking-widest uppercase text-teallt border-b border-line pb-3 mb-5">Languages</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="s-tag">Python</span>
+            <span class="s-tag">JavaScript</span>
+            <span class="s-tag">HTML5</span>
+            <span class="s-tag">CSS3</span>
+          </div>
+        </div>
+
+        <div class="reveal bg-navymid border border-line rounded-md p-7 hover:border-teal/40 transition-colors duration-200">
+          <div class="font-mono text-xs tracking-widest uppercase text-teallt border-b border-line pb-3 mb-5">Frontend</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="s-tag">Tailwind CSS</span>
+            <span class="s-tag">Responsive Design</span>
+            <span class="s-tag">Cross-browser CSS</span>
+            <span class="s-tag">Animations</span>
+          </div>
+        </div>
+
+        <div class="reveal bg-navymid border border-line rounded-md p-7 hover:border-teal/40 transition-colors duration-200">
+          <div class="font-mono text-xs tracking-widest uppercase text-teallt border-b border-line pb-3 mb-5">Hardware &amp; IoT</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="s-tag">ESP32</span>
+            <span class="s-tag">Hardware Sensors</span>
+            <span class="s-tag">Cloud Analytics</span>
+            <span class="s-tag">Real-time Data</span>
+          </div>
+        </div>
+
+        <div class="reveal bg-navymid border border-line rounded-md p-7 hover:border-teal/40 transition-colors duration-200">
+          <div class="font-mono text-xs tracking-widest uppercase text-teallt border-b border-line pb-3 mb-5">Media &amp; Writing</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="s-tag">Sports Commentary</span>
+            <span class="s-tag">Analytical Writing</span>
+            <span class="s-tag">Content Strategy</span>
+            <span class="s-tag">Multi-platform</span>
+          </div>
+        </div>
+
+        <div class="reveal bg-navymid border border-line rounded-md p-7 hover:border-teal/40 transition-colors duration-200">
+          <div class="font-mono text-xs tracking-widest uppercase text-teallt border-b border-line pb-3 mb-5">Brand &amp; Social Media</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="s-tag">Brand Management</span>
+            <span class="s-tag">Audience Growth</span>
+            <span class="s-tag">Social Strategy</span>
+            <span class="s-tag">Brand Identity</span>
+          </div>
+        </div>
+
+        <div class="reveal bg-navymid border border-line rounded-md p-7 hover:border-teal/40 transition-colors duration-200">
+          <div class="font-mono text-xs tracking-widest uppercase text-teallt border-b border-line pb-3 mb-5">Tools &amp; Practices</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="s-tag">Git</span>
+            <span class="s-tag">VS Code</span>
+            <span class="s-tag">Problem Solving</span>
+            <span class="s-tag">Logical Thinking</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROJECTS ── -->
+  <section id="projects" class="px-16 py-24 bg-navymid border-y border-line">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex items-center gap-3 font-mono text-xs tracking-widest uppercase text-teallt mb-3">
+        03 — Projects <span class="w-12 h-px bg-teal opacity-40"></span>
+      </div>
+      <h2 class="font-serif text-cream mb-12 leading-tight" style="font-size:clamp(2rem,3.5vw,3rem)">
+        Selected <em class="text-teallt">Work</em>
+      </h2>
+
+      <div class="grid grid-cols-2 gap-8">
+
+        <!-- Project 1 -->
+        <div class="project-card reveal relative bg-navy border border-line rounded-md p-8 flex flex-col gap-4 hover:-translate-y-1 hover:border-teal/30 hover:shadow-2xl transition-all duration-200 overflow-hidden">
+          <div class="flex items-start justify-between gap-3">
+            <span class="text-3xl">⚡</span>
+            <div class="flex gap-2">
+              <span class="p-link cursor-default opacity-50">Video Demo</span>
+            </div>
+          </div>
+          <div class="font-serif text-2xl text-cream">IoT Smart Energy Monitor</div>
+          <p class="text-subtle text-sm leading-relaxed flex-1">
+            Designed and implemented a real-time Smart Energy Monitoring System for tertiary institutions. Integrates hardware sensors and ESP32 microcontrollers with cloud-based data analytics and a live dashboard UI for monitoring energy consumption patterns across campus infrastructure.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="t-badge">ESP32</span>
+            <span class="t-badge">IoT</span>
+            <span class="t-badge">Python</span>
+            <span class="t-badge">Cloud Analytics</span>
+            <span class="t-badge">Hardware Sensors</span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card reveal relative bg-navy border border-line rounded-md p-8 flex flex-col gap-4 hover:-translate-y-1 hover:border-teal/30 hover:shadow-2xl transition-all duration-200 overflow-hidden">
+          <div class="flex items-start justify-between gap-3">
+            <span class="text-3xl">🌐</span>
+            <div class="flex gap-2">
+              <span class="p-link cursor-default opacity-50">This Site</span>
+            </div>
+          </div>
+          <div class="font-serif text-2xl text-cream">Responsive Portfolio Website</div>
+          <p class="text-subtle text-sm leading-relaxed flex-1">
+            Fully responsive, modern personal portfolio built from scratch using HTML, CSS and JavaScript. Features smooth animations, cross-browser compatibility, a working contact form, and a clean multi-page structure with separate About and Projects sections.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="t-badge">HTML5</span>
+            <span class="t-badge">CSS3</span>
+            <span class="t-badge">JavaScript</span>
+            <span class="t-badge">Tailwind CSS</span>
+            <span class="t-badge">Responsive</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="px-16 py-24">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 gap-20 items-start">
+
+      <!-- Left -->
+      <div>
+        <div class="flex items-center gap-3 font-mono text-xs tracking-widest uppercase text-teallt mb-4">
+          04 — Contact <span class="w-12 h-px bg-teal opacity-40"></span>
+        </div>
+        <h2 class="font-serif text-cream mb-6 leading-tight" style="font-size:clamp(2rem,3.5vw,3rem)">
+          Let's <em class="text-teallt">Connect</em>
+        </h2>
+        <p class="text-subtle text-base mb-8">Whether you have a role in mind, a project to discuss, or just want to connect — my inbox is always open.</p>
+
+        <div class="flex flex-col gap-3">
+          <a href="mailto:timilehinoloye20@gmail.com" target="_blank" class="c-btn inline-flex items-center gap-2 w-fit">✉ Email Me</a>
+          <a href="https://www.linkedin.com/in/samuel-oloyede-1a0297295?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" class="c-btn inline-flex items-center gap-2 w-fit">in LinkedIn</a>
+          <a href="#" class="c-btn inline-flex items-center gap-2 w-fit" target="_blank">⬡ GitHub</a>
+          <a href="#" class="c-btn inline-flex items-center gap-2 w-fit" target="_blank">✕ Twitter / X</a>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="reveal">
+        <form class="contact-form flex flex-col gap-4" id="contactForm">
+          <input type="text"  placeholder="Your Name"    required />
+          <input type="email" placeholder="Your Email"   required />
+          <textarea           placeholder="Your Message" required></textarea>
+          <button type="submit"
+            class="bg-teal text-white font-mono text-xs font-medium tracking-widest uppercase px-6 py-3.5 rounded-sm hover:bg-teallt hover:text-tealdark transition-colors duration-200 hover:-translate-y-0.5 transform">
+            Send Message →
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="text-center px-16 py-6 border-t border-line font-mono text-xs text-muted tracking-wide">
+    © 2025 Oloyede Samuel Timilehin — Designed &amp; built with care.
+  </footer>
+
+  <!-- ── JS ── -->
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Active nav highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) current = s.id; });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === `#${current}` ? '#61e2f0' : '';
+      });
+    });
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // scrollToSection() helper
+    function scrollToSection(id) {
+      const target = document.getElementById(id);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Contact form
+    const form = document.getElementById('contactForm');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Message sent! (You can connect this to email later)');
+        form.reset();
+      });
+    }
+  </script>
+
+</body>
+</html>

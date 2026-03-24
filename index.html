@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">My Portfolio</h1>
+            <ul class="nav-links">
+                <li><a href="about.html" target="_blank">About</a></li>
+                <li><a href="projects.html" target="_blank">Projects</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#testimonial">Testimonial</a></li>
+            </ul>
+            <a href="#contact" class="btn-primary" onclick="scrollToSection('contact')">Let's Talk</a>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+        <h1>Hello, I'm <span>Oloyede Samuel Timilehin</span></h2>
+        <h2>A Computer Engineer | Web Developer | Sports Pundit and Writer | Social Media Manager and Brand Manager</p>
+        <div class="hero-buttons">
+        <a href="about.html" class="btn-primary">Learn More</a>
+        <a href="#contact" class="btn-secondary" onclick="scrollToSection('contact')">Hire Me</a>
+        </div>
+            </div>
+       <div class="hero-image">
+      <img src="C:\Users\user\OneDrive\Desktop\all over again\portfolio\IMG_5233.jpeg" alt="My photo">
+      </div>
+        </div>
+        <button onclick="scrollToSection('projects')">See My Work</button>
+    </section>
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" rrequired>
+            <textarea placeholder="Your Message"></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Oloyede Samuel Timilehin. All Rights reserved.</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
